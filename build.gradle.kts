@@ -1,5 +1,10 @@
 import java.util.Date
 
+
+val artifactName = "kushetka"
+val artifactGroup = "com.fieldkt"
+val artifactVersion = "0.0.2.DEV"
+
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
     id("org.jetbrains.kotlin.jvm").version("1.3.21")
@@ -50,8 +55,6 @@ val sourcesJar by tasks.creating(Jar::class) {
     from(sourceSets.getByName("main").allSource)
 }
 
-val artifactName = "kushetka"
-val artifactGroup = "com.eveyedward"
 val pomUrl = "https://github.com/Evyy/kushetka"
 val pomScmUrl = "https://github.com/Evyy/kushetka"
 val pomIssueUrl = "https://github.com/Evyy/kushetka"
@@ -82,7 +85,7 @@ publishing {
             groupId = artifactGroup
             artifactId = artifactName
             // version is gotten from an external plugin
-            version = project.versioning.info.display
+            version = artifactVersion
             // This is the main artifact
             from(components["java"])
             // We are adding documentation artifact
@@ -124,7 +127,6 @@ bintray {
 
     // Automatic publication enabled
     publish = true
-    
     override = true
 
     // Set maven publication onto bintray plugin
@@ -144,7 +146,7 @@ bintray {
 
         // Configure version
         version.apply {
-            name = project.versioning.info.display
+            name = artifactVersion
             desc = pomDesc
             released = Date().toString()
             vcsTag = project.versioning.info.tag

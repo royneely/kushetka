@@ -1,4 +1,4 @@
-package kushetka
+package com.fieldkt.kushetka
 
 import java.net.URL
 

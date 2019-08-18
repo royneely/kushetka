@@ -1,4 +1,4 @@
-package kushetka
+package com.fieldkt.kushetka
 
 class CouchDatabase(
     private val name: String,
