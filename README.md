@@ -8,6 +8,19 @@
 
 **Kushetka** is a kotlin CouchDb client. 
 
+
+```kotlin
+repositories {
+    maven { setUrl("https://dl.bintray.com/evyy/kushetka") }
+}
+```
+
+```kotlin
+dependencies {
+    compile("com.eveyedward:kushetka:0.1.0.DEV")
+}
+```
+
 ```kotlin
     val couchDbServer = Kushetka.getServer("http://localhost:5984")
     val catsDb = couchDbServer.getDb("cats")
