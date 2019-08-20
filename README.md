@@ -1,6 +1,6 @@
 <p align="center">
   <br>
-  <img src='./docs/kushetka_logo.png' width='320'>
+  <img src='./docs/kushetka_logo.png' width='260'>
   <br>
   <br>
 </p> 
