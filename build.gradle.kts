@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import java.util.Date
 
 
@@ -23,9 +24,24 @@ repositories {
     mavenCentral()
 }
 
+object Versions {
+    val ktor = "1.2.5"
+}
+
 dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    compile("io.ktor:ktor-client-core:${Versions.ktor}")
+    compile("io.ktor:ktor-client-json:${Versions.ktor}")
+    compile("io.ktor:ktor-client-jackson:${Versions.ktor}")
+    compile("io.ktor:ktor-client-auth-jvm:${Versions.ktor}")
+    compile("io.ktor:ktor-client-cio:${Versions.ktor}")
+    compile("io.github.microutils:kotlin-logging:1.7.7")
+    compile("org.slf4j:slf4j-api:1.7.5")
+    compile("ch.qos.logback:logback-classic:1.2.3")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
+    implementation("io.ktor:ktor-client-logging-jvm:${Versions.ktor}")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
@@ -34,7 +50,25 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
+allprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs + "-Xuse-experimental=kotlin.Experimental"
+        }
+    }
+    tasks.withType<Test> {
+        testLogging {
+            showStandardStreams = true
+            events("standardOut", "started", "passed", "skipped", "failed")
+            exceptionFormat = TestExceptionFormat.FULL
+        }
+    }
+}
+
+
 tasks {
+
+
     dokka {
         outputFormat = "html"
         outputDirectory = "$buildDir/javadoc"

@@ -4,13 +4,14 @@
 package com.fieldkt.kushetka
 
 import com.fieldkt.kushetka.CouchDbServer.Credentials
-import java.net.URL
+import io.ktor.http.Url
 
 object Kushetka {
     fun getServer(baseUrl: String, credentials: Credentials? = null): CouchDbServer {
-        return getServer(URL(baseUrl), credentials)
+        return getServer(Url(baseUrl), credentials)
     }
-    fun getServer(baseUrl: URL, credentials: Credentials? = null): CouchDbServer {
+
+    fun getServer(baseUrl: Url, credentials: Credentials? = null): CouchDbServer {
         return CouchDbServer(baseUrl, credentials)
     }
 }
